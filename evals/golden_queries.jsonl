@@ -1,0 +1,2 @@
+{"id":"synthetic-revenue","source":"synthetic test fixture, not ViDoRe","query":"revenue","qrels":{"doc:p1":1}}
+{"id":"synthetic-staffing","source":"synthetic test fixture, not ViDoRe","query":"engineering employees","qrels":{"doc:p2":1}}

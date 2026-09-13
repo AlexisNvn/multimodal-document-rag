@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "multimodal-document-rag"
+version = "0.1.0"
+description = "Page-grounded hybrid multimodal RAG with ViDoRe V3 evaluation"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "pydantic-settings>=2.7,<3",
+  "python-multipart>=0.0.20,<1", "numpy>=1.26,<3", "pillow>=11,<13",
+  "pypdfium2>=4.30,<6", "httpx>=0.28,<1", "huggingface-hub>=0.28,<2",
+  "datasets>=3.2,<5",
+]
+
+[project.optional-dependencies]
+models = ["sentence-transformers>=3.4,<6"]
+visual = ["colpali-engine>=0.3.10,<0.4", "torch>=2.5,<3"]
+docling = ["docling>=2.20,<3"]
+
+[dependency-groups]
+dev = ["pytest>=8.3,<10", "pytest-cov>=6,<8", "ruff>=0.9,<1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rag"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["unit: isolated components", "integration: API and persistence", "eval: deterministic metric regression"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+# PyPI 4.9.3 declares no dependencies; avoid its legacy metadata build during resolution.
+[[tool.uv.dependency-metadata]]
+name = "antlr4-python3-runtime"
+version = "4.9.3"
+requires-dist = []

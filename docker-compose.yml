@@ -1,0 +1,19 @@
+services:
+  api:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      RAG_DATA_DIR: /app/data
+      RAG_TEXT_BACKEND: hash
+      RAG_VISUAL_BACKEND: none
+      RAG_ANSWER_BACKEND: extractive
+    volumes:
+      - rag-data:/app/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+volumes:
+  rag-data:
