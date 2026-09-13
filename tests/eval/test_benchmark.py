@@ -3,8 +3,8 @@ import json
 import pytest
 from PIL import Image
 
+from rag.eval.benchmark import benchmark
 from rag.eval.datasets import load_corpus, write_jsonl
-from scripts.benchmark import benchmark
 
 pytestmark = pytest.mark.eval
 
